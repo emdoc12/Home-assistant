@@ -74,6 +74,14 @@ mqtt:
   username: pi
   password: mqttpass
 
+wink:
+  email: !secret wink_email
+  password: !secret wink_password
+
+nest:
+  client_id: !secret nest_client_id
+  client_secret: !secret nest_client_secret
+
 #mqtt:
 #  broker: m10.cloudmqtt.com
 #  port: 15911
@@ -120,20 +128,20 @@ zone 1:
 # Light Switches
 #################
 
-light 1:
--  platform: mqtt
-   name: "Living Room Lights"
-   state_topic: "smartthings/Living Room Lights/switch"
-   command_topic: "smartthings/Living Room Lights/switch"
-   brightness_state_topic: "smartthings/Living Room Lights/level"
-   brightness_command_topic: "smartthings/Living Room Lights/level"
-   brightness_scale: 101
-   brightness_value_template: '{{ value }}'
-   qos: 0
-   payload_on: "on"
-   payload_off: "off"
-   optimistic: false
-   retain: true
+# light 1:
+# -  platform: mqtt
+#    name: Living Room Lights
+#    state_topic: "smartthings/Living Room Lights/switch"
+#    command_topic: "smartthings/Living Room Lights/switch"
+#    brightness_state_topic: "smartthings/Living Room Lights/level"
+#    brightness_command_topic: "smartthings/Living Room Lights/level"
+#    brightness_scale: 101
+#    brightness_value_template: '{{ value }}'
+#    qos: 0
+#    payload_on: "on"
+#    payload_off: "off"
+#    optimistic: false
+#    retain: true
 
 light 2:
 -  platform: mqtt
