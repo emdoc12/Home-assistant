@@ -1,0 +1,284 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret home_lat
+  longitude: !secret home_long
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 296
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/New_York
+  #customize: !include customize.yaml
+  #group: !include config/group.yaml
+
+# Show links to resources in log and frontend
+introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  api_password: !secret http_password
+  ssl_certificate: /etc/letsencrypt/live/hass12.duckdns.org/fullchain.pem
+  ssl_key: /etc/letsencrypt/live/hass12.duckdns.org/privkey.pem
+  base_url: hass12.duckdns.org:8123
+
+#http:
+  # Uncomment this to add a password (recommended!)
+  # api_password: PASSWORD
+  # Uncomment this if you are using SSL or running in Docker etc
+  # base_url: example.duckdns.org:8123
+
+# Checks for available updates
+updater:
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time.
+history:
+
+# View all events in a logbook
+logbook:
+
+# Track the sun
+sun:
+
+# Weather Prediction
+sensor:
+  - platform: darksky
+    api_key: 749d5e05fec3a93ce1cb490ce62f8aca
+    monitored_conditions:
+      - temperature
+      - summary
+      #- icon
+      #- nearest_storm_distance
+
+
+# Text to speech
+tts:
+  platform: google
+
+mqtt:
+  broker: localhost
+  port: 1883
+  client_id: home-assistant-1
+  username: pi
+  password: mqttpass
+
+#mqtt:
+#  broker: m10.cloudmqtt.com
+#  port: 15911
+#  client_id: home-assistant-1
+#  keepalive: 60
+#  username: pi
+#  password: mqttpass
+
+ios:
+
+#customize:
+#battery_iphone:
+#hidden: true
+#  iphone_battery_state:
+#  hidden: true
+
+device_tracker:
+  - platform: nmap_tracker
+    hosts: 192.168.1.1/24
+    home_interval: 10
+  - platform: locative
+  - platform: owntracks
+  # - platform: unifi
+  #   host: 192.168.1.30
+  #   username: !secret unifi_user
+  #   password: !secret unifi_pass
+  #   verify_ssl: false
+  #   interval_seconds: 10
+  #   consider_home: 180
+  #   track_new_devices: no
+
+############
+# Zones
+############
+
+zone 1:
+  name: Home
+  latitude: !secret home_lat
+  longitude: !secret home_long
+  radius: 100
+  icon: mdi:home-outline
+
+#################
+# Light Switches
+#################
+
+light 1:
+-  platform: mqtt
+   name: "Living Room Lights"
+   state_topic: "smartthings/Living Room Lights/switch"
+   command_topic: "smartthings/Living Room Lights/switch"
+   brightness_state_topic: "smartthings/Living Room Lights/level"
+   brightness_command_topic: "smartthings/Living Room Lights/level"
+   brightness_scale: 101
+   brightness_value_template: '{{ value }}'
+   qos: 0
+   payload_on: "on"
+   payload_off: "off"
+   optimistic: false
+   retain: true
+
+light 2:
+-  platform: mqtt
+   name: "Dining Table Light"
+   state_topic: "smartthings/Dining Table Light/switch"
+   command_topic: "smartthings/Dining Table Light/switch"
+   brightness_state_topic: "smartthings/Dining Table Light/level"
+   brightness_command_topic: "smartthings/Dining Table Light/level"
+   brightness_scale: 101
+   brightness_value_template: '{{ value }}'
+   qos: 0
+   payload_on: "on"
+   payload_off: "off"
+   optimistic: false
+   retain: true
+
+light 3:
+-  platform: mqtt
+   name: "Front Hall Lights"
+   state_topic: "smartthings/Front Hall Lights/switch"
+   command_topic: "smartthings/Front Hall Lights/switch"
+   brightness_state_topic: "smartthings/Front Hall Lights/level"
+   brightness_command_topic: "smartthings/Front Hall Lights/level"
+   brightness_scale: 101
+   brightness_value_template: '{{ value }}'
+   qos: 0
+   payload_on: "on"
+   payload_off: "off"
+   optimistic: false
+   retain: true
+
+light 4:
+-  platform: mqtt
+   name: "Kitchen Lights"
+   state_topic: "smartthings/Kitchen Lights/switch"
+   command_topic: "smartthings/Kitchen Lights/switch"
+   brightness_state_topic: "smartthings/Kitchen Lights/level"
+   brightness_command_topic: "smartthings/Kitchen Lights/level"
+   brightness_scale: 101
+   brightness_value_template: '{{ value }}'
+   qos: 0
+   payload_on: "on"
+   payload_off: "off"
+   optimistic: false
+   retain: true
+
+light 5:
+-  platform: mqtt
+   name: "Master Bedroom Light"
+   state_topic: "smartthings/Master Bedroom Light/switch"
+   command_topic: "smartthings/Master Bedroom Light/switch"
+   brightness_state_topic: "smartthings/Master Bedroom Light/level"
+   brightness_command_topic: "smartthings/Master Bedroom Light/level"
+   brightness_scale: 101
+   brightness_value_template: '{{ value }}'
+   qos: 0
+   payload_on: "on"
+   payload_off: "off"
+   optimistic: false
+   retain: true
+
+light 6:
+-  platform: mqtt
+   name: "Master Bathroom Light"
+   state_topic: "smartthings/Master Bathroom Light/switch"
+   command_topic: "smartthings/Master Bathroom Light/switch"
+   brightness_state_topic: "smartthings/Master Bathroom Light/level"
+   brightness_command_topic: "smartthings/Master Bathroom Light/level"
+   brightness_scale: 101
+   brightness_value_template: '{{ value }}'
+   qos: 0
+   payload_on: "on"
+   payload_off: "off"
+   optimistic: false
+   retain: true
+
+light 7:
+-  platform: mqtt
+   name: "Master Shower Light"
+   state_topic: "smartthings/Master Shower Light/switch"
+   command_topic: "smartthings/Master Shower Light/switch"
+   brightness_state_topic: "smartthings/Master Shower Light/level"
+   brightness_command_topic: "smartthings/Master Shower Light/level"
+   brightness_scale: 101
+   brightness_value_template: '{{ value }}'
+   qos: 0
+   payload_on: "on"
+   payload_off: "off"
+   optimistic: false
+   retain: true
+
+light 8:
+-  platform: mqtt
+   name: "Garage Light"
+   state_topic: "smartthings/Garage Light/switch"
+   command_topic: "smartthings/Garage Light/switch"
+   brightness_state_topic: "smartthings/Garage Light/level"
+   brightness_command_topic: "smartthings/Garage Light/level"
+   brightness_scale: 101
+   brightness_value_template: '{{ value }}'
+   qos: 0
+   payload_on: "on"
+   payload_off: "off"
+   optimistic: false
+   retain: true
+
+light 9:
+-  platform: mqtt
+   name: "Garage Coach Light"
+   state_topic: "smartthings/Garage Coach Light/switch"
+   command_topic: "smartthings/Garage Coach Light/switch"
+   brightness_state_topic: "smartthings/Garage Coach Light/level"
+   brightness_command_topic: "smartthings/Garage Coach Light/level"
+   brightness_scale: 101
+   brightness_value_template: '{{ value }}'
+   qos: 0
+   payload_on: "on"
+   payload_off: "off"
+   optimistic: false
+   retain: true
+
+################
+# Fan Switches
+################
+
+fan 1:
+-  platform: mqtt
+   name: "Living Room Fan"
+   state_topic: "smartthings/Living Room Fan/switch"
+   command_topic: "smartthings/Living Room Fan/switch"
+   brightness_state_topic: "smartthings/Living Room Fan/level"
+   brightness_command_topic: "smartthings/Living Room Fan/level"
+   payload_on: "on"
+   payload_off: "off"
+   optimistic: false
+   retain: true
+
+fan 2:
+-  platform: mqtt
+   name: "Master Bedroom Fan"
+   state_topic: "smartthings/Master Bedroom Fan/switch"
+   command_topic: "smartthings/Master Bedroom Fan/switch"
+   brightness_state_topic: "smartthings/Master Bedroom Fan/level"
+   brightness_command_topic: "smartthings/Master Bedroom Fan/level"
+   payload_on: "on"
+   payload_off: "off"
+   optimistic: false
+   retain: true

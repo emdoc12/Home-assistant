@@ -1,0 +1,16 @@
+#####################################################################
+### HOME VIEW (DEFAULT)
+#####################################################################
+default_view:
+  name: Home
+  view: yes
+  icon: mdi:castle
+  entities:
+    - group.living_room
+    - group.kitchen
+    - group.master_bedroom_fan
+    - group.garage
+    - group.entry
+    - group.travel_mike
+    - group.travel_rhonda
+    - group.device_status
