@@ -24,9 +24,9 @@ config:
 
 http:
   api_password: !secret http_password
-  ssl_certificate: /etc/letsencrypt/live/hass12.duckdns.org/fullchain.pem
-  ssl_key: /etc/letsencrypt/live/hass12.duckdns.org/privkey.pem
-  base_url: hass12.duckdns.org:8123
+  ssl_certificate: !secret ssl_cert
+  ssl_key: !secret ssl_key
+  base_url: !secret base_url
 
 #http:
   # Uncomment this to add a password (recommended!)
@@ -55,7 +55,7 @@ sun:
 # Weather Prediction
 sensor:
   - platform: darksky
-    api_key: 749d5e05fec3a93ce1cb490ce62f8aca
+    api_key: !secret darksky_api
     monitored_conditions:
       - temperature
       - summary
